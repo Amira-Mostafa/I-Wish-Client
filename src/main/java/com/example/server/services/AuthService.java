@@ -6,19 +6,23 @@ public class AuthService {
 
     private DataManager dataManager = DataManager.getInstance();
 
-    public User register(String name, String email, String password, String imagePath) {
+    public String register(String name, String email, String password, String imagePath) {
         boolean success = dataManager.register(name, email, password, imagePath);
         if (success) {
-            return dataManager.getCurrentUser();
+            User user = dataManager.getCurrentUser();
+            return "SUCCESS|" + user.getUserId() + "|" + user.getName() + "|" + user.getEmail() + "|" + 
+                   (user.getImagePath() != null ? user.getImagePath() : "");
         }
-        return null;
+         return "ERROR|Registration failed";
     }
 
-    public User login(String email, String password) {
+    public String login(String email, String password) {
         boolean success = dataManager.login(email, password);
         if (success) {
-            return dataManager.getCurrentUser();
+            User user = dataManager.getCurrentUser();
+            return "SUCCESS|" + user.getUserId() + "|" + user.getName() + "|" + user.getEmail() + "|" + 
+                   (user.getImagePath() != null ? user.getImagePath() : "");
         }
-        return null;
+        return "ERROR|Invalid credentials";
     }
 }
