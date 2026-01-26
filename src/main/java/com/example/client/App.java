@@ -12,19 +12,9 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        System.out.println("=== Testing Database Connection ===");
     
-        try {
-            // Test connection directly
-            com.example.server.services.DatabaseConnection.getConnection();
-            System.out.println("✓ Database connection successful!");
-        } catch (Exception e) {
-            System.err.println("✗ Database connection failed: " + e.getMessage());
-            e.printStackTrace();
-        }
 
         // Start the server in a separate thread
-        System.out.println("=== Starting Server ===");
         Thread serverThread = new Thread(() -> {
             try {
                 WishServer server = new WishServer();
@@ -51,7 +41,7 @@ public class App extends Application {
         
         Scene scene = new Scene(root, 1550, 800);
         
-        stage.setTitle("🎁 I-yWish - Make wishes come true together");
+        stage.setTitle("🎁 I-Wish - Make wishes come true together");
         stage.setMinWidth(1000);
         stage.setMinHeight(700);
         stage.setScene(scene);

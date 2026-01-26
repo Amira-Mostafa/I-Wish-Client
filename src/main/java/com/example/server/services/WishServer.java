@@ -16,7 +16,7 @@ public class WishServer {
     public WishServer() {
         try {
             serverSocket = new ServerSocket(PORT);
-            threadPool = Executors.newFixedThreadPool(10); // Handle up to 10 clients
+            threadPool = Executors.newFixedThreadPool(10); 
             System.out.println("🎁 i-Wish Server started on port " + PORT);
         } catch (IOException e) {
             System.err.println("Failed to start server: " + e.getMessage());
@@ -43,7 +43,7 @@ public class WishServer {
     public static void main(String[] args){
         try {
             DatabaseConnection.getConnection();
-            System.out.println("✓ Database ready");
+            System.out.println(" Database ready");
 
             new WishServer().start();
             
