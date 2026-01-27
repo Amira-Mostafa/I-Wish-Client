@@ -1,6 +1,7 @@
 package com.example.client;
 
 import com.example.client.utils.ServerMonitor;
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -15,7 +16,7 @@ public class App extends Application {
         // Load initial scene based on server state
         boolean serverUp = checkServerOnce();
         String initialFXML = serverUp ?
-                "/com/example/views/login.fxml" :
+                "/com/example/views/login.fxml" : 
                 "/com/example/views/notAvailableServer.fxml";
 
         Parent root = FXMLLoader.load(getClass().getResource(initialFXML));
