@@ -5,8 +5,8 @@ import java.io.IOException;
 
 import com.example.client.services.DataManagerClient;
 import com.example.client.services.UserSession;
-import com.example.utils.UIUtils;
 import com.example.utils.DialogUtils;
+import com.example.utils.UIUtils;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -139,7 +139,7 @@ public class RegisterController {
                 }
 
                 Stage stage = (Stage) createAccountButton.getScene().getWindow();
-                stage.setScene(new Scene(root, 1200, 800));
+                stage.setScene(new Scene(root, 1550, 800));
                 
             } catch (IOException ex) {
                 ex.printStackTrace();
