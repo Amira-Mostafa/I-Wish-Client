@@ -79,36 +79,31 @@
                     </VBox>
                 </HBox>
                 
-               <HBox spacing="20">
-
-                <!-- LEFT: Stats Grid (aligned start) -->
-                <GridPane fx:id="statsGrid" hgap="20" vgap="20" HBox.hgrow="ALWAYS">
+                <GridPane fx:id="statsGrid" hgap="20" vgap="20">
                     <padding>
-                        <Insets bottom="0" left="0" right="0" top="20" />
+                        <Insets bottom="20" left="0" right="0" top="20" />
                     </padding>
                 </GridPane>
-
-                <!-- RIGHT: Quick Actions (aligned with cards top) -->
-                <VBox fx:id="quickActions"
-                    spacing="15"
-                    prefWidth="420" minWidth="420"
-                    style="-fx-background-color: white; -fx-background-radius: 15;">
-                    <padding>
-                        <Insets bottom="20" left="20" right="20" top="20" />
-                    </padding>
-                    <Label text="Quick Actions" style="-fx-font-weight: bold; -fx-font-size: 20;" />
-                </VBox>
-            </HBox>
-
-            <!-- ROW 2: Recent Activity spans from cards start to quick-actions end -->
-            <VBox fx:id="recentActivity"
-                spacing="15"
-                style="-fx-background-color: white; -fx-background-radius: 15;">
-                <padding>
-                    <Insets bottom="20" left="20" right="20" top="20" />
-                </padding>
-                <Label text="Recent Activity" style="-fx-font-weight: bold; -fx-font-size: 20;" />
-            </VBox>
+                
+                <HBox spacing="20">
+                    <VBox spacing="20" prefWidth="700">
+                        <VBox fx:id="recentActivity" spacing="15" style="-fx-background-color: white; -fx-background-radius: 15;">
+                            <padding>
+                                <Insets bottom="20" left="20" right="20" top="20" />
+                            </padding>
+                            <Label text="Recent Activity" style="-fx-font-weight: bold; -fx-font-size: 20;" />
+                        </VBox>
+                    </VBox>
+                    
+                    <VBox spacing="20" prefWidth="400">
+                        <VBox fx:id="quickActions" spacing="15" style="-fx-background-color: white; -fx-background-radius: 15;">
+                            <padding>
+                                <Insets bottom="20" left="20" right="20" top="20" />
+                            </padding>
+                            <Label text="Quick Actions" style="-fx-font-weight: bold; -fx-font-size: 20;" />
+                        </VBox>
+                    </VBox>
+                </HBox>
             </VBox>
         </ScrollPane>
     </center>

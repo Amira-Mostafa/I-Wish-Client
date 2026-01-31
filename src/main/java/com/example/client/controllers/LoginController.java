@@ -68,7 +68,7 @@ public class LoginController {
                 }
                 
                 Stage stage = (Stage) signInButton.getScene().getWindow();
-                stage.setScene(new Scene(root, 1550, 800));
+                stage.setScene(new Scene(root, 1200, 800));
             } catch (IOException ex) {
                 ex.printStackTrace();
                 showError("Error loading dashboard: " + ex.getMessage());
