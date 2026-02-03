@@ -23,7 +23,6 @@ public class App extends Application {
     public void start(Stage primaryStage) throws Exception {
         stage = primaryStage;
 
-        // Show Not Available first
         Parent root = FXMLLoader.load(getClass().getResource("/com/example/views/notAvailableServer.fxml"));
         Scene scene = new Scene(root, WIDTH, HEIGHT);
         stage.setScene(scene);
@@ -37,10 +36,9 @@ public class App extends Application {
         stage.show();
         stage.centerOnScreen();
 
-        startServerChecker(); // AUTO SWITCH
+        startServerChecker(); 
     }
 
-    // Change screen
     public static void loadScene(String fxml) {
         try {
             Parent root = FXMLLoader.load(App.class.getResource(fxml));
@@ -57,7 +55,6 @@ public class App extends Application {
         }
     }
 
-    // Check server every 2 seconds
     private void startServerChecker() {
         Timer timer = new Timer(true);
 
