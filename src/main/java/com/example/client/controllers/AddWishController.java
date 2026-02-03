@@ -33,7 +33,6 @@ public class AddWishController {
         try {
             wishImageView.setImage(new Image(UIUtils.DEFAULT_WISH_IMAGE, 100, 100, true, true));
         } catch (Exception e) {
-            // Ignore
         }
         
         selectImageButton.setOnAction(e -> selectImage());
