@@ -29,7 +29,7 @@
     </top>
     
     <left>
-        <VBox spacing="10" style="-fx-background-color: #f8f9fa;" prefWidth="250">
+        <VBox spacing="10" styleClass="sidebar" style="-fx-background-color: #f8f9fa;">
             <padding>
                 <Insets bottom="30" left="20" right="20" top="30" />
             </padding>
@@ -42,19 +42,19 @@
             
             <Button fx:id="dashboardBtn" text="📊 Dashboard" onAction="#handleDashboard" 
                     style="-fx-background-color: transparent; -fx-text-fill: #333; -fx-font-weight: normal;" 
-                    prefWidth="210" prefHeight="45" alignment="CENTER_LEFT" />
+                    styleClass="nav-button" prefHeight="45" alignment="CENTER_LEFT" />
             
             <Button fx:id="friendsBtn" text="👥 Friends" onAction="#handleFriends" 
                     style="-fx-background-color: #764ba2; -fx-text-fill: white; -fx-font-weight: bold;" 
-                    prefWidth="210" prefHeight="45" alignment="CENTER_LEFT" />
+                    styleClass="nav-button" prefHeight="45" alignment="CENTER_LEFT" />
             
             <Button fx:id="wishListBtn" text="🎯 My Wish List" onAction="#handleWishList" 
                     style="-fx-background-color: transparent; -fx-text-fill: #333; -fx-font-weight: normal;" 
-                    prefWidth="210" prefHeight="45" alignment="CENTER_LEFT" />
+                    styleClass="nav-button" prefHeight="45" alignment="CENTER_LEFT" />
             
             <Button fx:id="notificationsBtn" text="🔔 Notifications" onAction="#handleNotifications" 
                     style="-fx-background-color: transparent; -fx-text-fill: #333; -fx-font-weight: normal;" 
-                    prefWidth="210" prefHeight="45" alignment="CENTER_LEFT" />
+                    styleClass="nav-button" prefHeight="45" alignment="CENTER_LEFT" />
         </VBox>
     </left>
     

@@ -1,6 +1,7 @@
 module com.example.client {
     requires javafx.controls;
     requires javafx.fxml;
+    requires java.desktop;
     requires org.json;
 
     exports com.example.client;

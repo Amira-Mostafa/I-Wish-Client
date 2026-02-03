@@ -3,28 +3,20 @@ package com.example.client.controllers;
 import java.io.IOException;
 import java.util.List;
 
-import com.example.models.Notification;
+import com.example.client.App;
 import com.example.client.services.DataManagerClient;
-import com.example.utils.DialogUtils;
+import com.example.models.Notification;
+import com.example.utils.*;
 
-import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.geometry.Insets;
-import javafx.geometry.Pos;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Priority;
-import javafx.scene.layout.Region;
-import javafx.scene.layout.VBox;
+import javafx.fxml.*;
+import javafx.geometry.*;
+import javafx.scene.*;
+import javafx.scene.control.*;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
+import javafx.scene.text.*;
 import javafx.stage.Stage;
-import com.example.utils.UIUtils;   
+
 
 public class NotificationsController {
     
@@ -177,17 +169,17 @@ public class NotificationsController {
     
     @FXML
     private void handleDashboard() {
-        loadScene("/com/example/views/dashboard.fxml");
+        App.loadScene("/com/example/views/dashboard.fxml");
     }
     
     @FXML
     private void handleFriends() {
-        loadScene("/com/example/views/friends.fxml");
+        App.loadScene("/com/example/views/friends.fxml");
     }
     
     @FXML
     private void handleWishList() {
-        loadScene("/com/example/views/wishlist.fxml");
+        App.loadScene("/com/example/views/wishlist.fxml");
     }
     
     @FXML
@@ -198,17 +190,6 @@ public class NotificationsController {
     
     @FXML
     private void handleLogout() {
-        loadScene("/com/example/views/login.fxml");
-    }
-    
-    private void loadScene(String fxmlPath) {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
-            Parent root = loader.load();
-            Stage stage = (Stage) dashboardBtn.getScene().getWindow();
-            stage.setScene(new Scene(root, 1550, 800));
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
+        App.loadScene("/com/example/views/login.fxml");
     }
 }

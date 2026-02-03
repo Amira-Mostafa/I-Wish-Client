@@ -3,25 +3,15 @@ package com.example.client.controllers;
 import java.io.File;
 import java.io.IOException;
 
-import com.example.client.services.DataManagerClient;
-import com.example.client.services.UserSession;
-import com.example.utils.UIUtils;
-import com.example.utils.DialogUtils;
+import com.example.client.services.*;
+import com.example.utils.*;
 
-import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Hyperlink;
-import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
+import javafx.fxml.*;
+import javafx.scene.*;
+import javafx.scene.control.*;
+import javafx.scene.image.*;
 import javafx.scene.shape.Circle;
-import javafx.stage.FileChooser;
-import javafx.stage.Stage;
+import javafx.stage.*;
 
 public class RegisterController {
     
@@ -139,7 +129,12 @@ public class RegisterController {
                 }
 
                 Stage stage = (Stage) createAccountButton.getScene().getWindow();
-                stage.setScene(new Scene(root, 1200, 800));
+                Scene scene = new Scene(root, 1200, 700);
+                scene.getStylesheets().add(getClass().getResource("/styles.css").toExternalForm());
+                stage.setScene(scene);
+                stage.setMinWidth(1200);
+                stage.setMinHeight(700);
+                stage.setResizable(true);
                 
             } catch (IOException ex) {
                 ex.printStackTrace();
@@ -159,7 +154,12 @@ public class RegisterController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/views/login.fxml"));
             Parent root = loader.load();
             Stage stage = (Stage) signInLink.getScene().getWindow();
-            stage.setScene(new Scene(root, 1550, 800));
+            Scene scene = new Scene(root, 1200, 700);
+            scene.getStylesheets().add(getClass().getResource("/styles.css").toExternalForm());
+            stage.setScene(scene);
+            stage.setMinWidth(1200);
+            stage.setMinHeight(700);
+            stage.setResizable(true);
         } catch (IOException ex) {
             ex.printStackTrace();
         }

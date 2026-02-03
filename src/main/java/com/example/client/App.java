@@ -1,49 +1,92 @@
 package com.example.client;
 
-import com.example.client.utils.ServerMonitor;
-
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.layout.Region;
 import javafx.stage.Stage;
+
+import java.net.Socket;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class App extends Application {
 
+    private static Stage stage;
+    private static final double WIDTH = 1200;
+    private static final double HEIGHT = 700;
+    private static boolean lastStatus = false;
+
     @Override
-    public void start(Stage stage) throws Exception {
+    public void start(Stage primaryStage) throws Exception {
+        stage = primaryStage;
 
-        // Load initial scene based on server state
-        boolean serverUp = checkServerOnce();
-        String initialFXML = serverUp ?
-                "/com/example/views/login.fxml" : 
-                "/com/example/views/notAvailableServer.fxml";
+        // Show Not Available first
+        Parent root = FXMLLoader.load(getClass().getResource("/com/example/views/notAvailableServer.fxml"));
+        Scene scene = new Scene(root, WIDTH, HEIGHT);
+        stage.setScene(scene);
 
-        Parent root = FXMLLoader.load(getClass().getResource(initialFXML));
-        stage.setScene(new Scene(root, 1550, 800));
-        stage.setTitle("🎁 i-Wish");
+        stage.setWidth(WIDTH);
+        stage.setHeight(HEIGHT);
+        stage.setMinWidth(WIDTH);
+        stage.setMinHeight(HEIGHT);
+        stage.setResizable(true);
+
         stage.show();
+        stage.centerOnScreen();
 
-        // Start background monitoring for live switching
-        ServerMonitor.getInstance().startMonitoring(
-                stage,
-                "/com/example/views/login.fxml",
-                "/com/example/views/notAvailableServer.fxml"
-        );
+        startServerChecker(); // AUTO SWITCH
     }
 
-    private boolean checkServerOnce() {
-        try (java.net.Socket socket = new java.net.Socket("localhost", 8888)) {
+    // Change screen
+    public static void loadScene(String fxml) {
+        try {
+            Parent root = FXMLLoader.load(App.class.getResource(fxml));
+            stage.getScene().setRoot(root);
+
+            if (root instanceof Region) {
+                Region r = (Region) root;
+                r.setPrefSize(WIDTH, HEIGHT);
+                r.setMinSize(WIDTH, HEIGHT);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    // Check server every 2 seconds
+    private void startServerChecker() {
+        Timer timer = new Timer(true);
+
+        timer.scheduleAtFixedRate(new TimerTask() {
+            @Override
+            public void run() {
+                boolean serverUp = isServerUp();
+
+                if (serverUp != lastStatus) {
+                    lastStatus = serverUp;
+
+                    Platform.runLater(() -> {
+                        if (serverUp) {
+                            loadScene("/com/example/views/login.fxml");
+                        } else {
+                            loadScene("/com/example/views/notAvailableServer.fxml");
+                        }
+                    });
+                }
+            }
+        }, 0, 2000);
+    }
+
+    private boolean isServerUp() {
+        try (Socket socket = new Socket("localhost", 8888)) {
             return true;
         } catch (Exception e) {
             return false;
         }
-    }
-
-    @Override
-    public void stop() throws Exception {
-        super.stop();
-        ServerMonitor.getInstance().stopMonitoring();
     }
 
     public static void main(String[] args) {

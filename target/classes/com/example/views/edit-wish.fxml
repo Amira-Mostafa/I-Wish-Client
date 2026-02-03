@@ -3,6 +3,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.image.ImageView?>
 
 <VBox alignment="TOP_CENTER" spacing="20" style="-fx-background-color: #f8f9fa;" 
       xmlns="http://javafx.com/javafx/11" 
@@ -38,8 +39,15 @@
             <Label text="Price ($) *" style="-fx-font-weight: bold;" GridPane.columnIndex="0" GridPane.rowIndex="2" />
             <TextField fx:id="priceField" promptText="e.g., 399.99" GridPane.columnIndex="1" GridPane.rowIndex="2" />
             
-            <Label text="Image URL (Optional)" style="-fx-font-weight: bold;" GridPane.columnIndex="0" GridPane.rowIndex="3" />
-            <TextField fx:id="imageField" promptText="https://example.com/image.jpg" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <Label text="Wish Image (Optional)" style="-fx-font-weight: bold;" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+            <HBox spacing="10" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                <ImageView fx:id="wishImageView" fitWidth="100" fitHeight="100" preserveRatio="true" 
+                           style="-fx-background-radius: 10; -fx-border-radius: 10; -fx-border-color: #e0e0e0; -fx-border-width: 2;" />
+                <VBox spacing="5">
+                    <Button fx:id="selectImageButton" text="Choose Image" prefWidth="150" prefHeight="35" />
+                    <Label fx:id="imagePathLabel" style="-fx-text-fill: #666; -fx-font-size: 11;" wrapText="true" maxWidth="200" />
+                </VBox>
+            </HBox>
         </GridPane>
         
         <Label fx:id="errorLabel" style="-fx-text-fill: red;" visible="false" wrapText="true" />

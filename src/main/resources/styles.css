@@ -1,0 +1,104 @@
+/* Application-wide styles for improved rendering and clarity */
+
+.root {
+    -fx-font-smoothing-type: lcd;
+    -fx-font-size: 13px;
+}
+
+.button {
+    -fx-font-smoothing-type: lcd;
+}
+
+.label {
+    -fx-font-smoothing-type: lcd;
+}
+
+.text-field {
+    -fx-font-smoothing-type: lcd;
+}
+
+.text-area {
+    -fx-font-smoothing-type: lcd;
+}
+
+/* Improve button hover effects */
+.button:hover {
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 8, 0, 0, 2);
+}
+
+/* Improve text field focus */
+.text-field:focused {
+    -fx-border-color: #764ba2;
+    -fx-border-width: 2px;
+}
+
+/* Responsive sidebar */
+.sidebar {
+    -fx-min-width: 200px;
+    -fx-max-width: 300px;
+    -fx-pref-width: 250px;
+}
+
+/* Responsive navigation buttons */
+.nav-button {
+    -fx-min-width: 180px;
+    -fx-max-width: 280px;
+    -fx-pref-width: 210px;
+}
+
+/* Responsive content area */
+.content-area {
+    -fx-padding: 30px;
+}
+
+/* Responsive grid layouts */
+.grid-pane {
+    -fx-hgap: 15px;
+    -fx-vgap: 15px;
+}
+
+/* Responsive text sizes */
+@media (max-width: 1400px) {
+    .title-label {
+        -fx-font-size: 22px;
+    }
+}
+
+@media (max-width: 1200px) {
+    .title-label {
+        -fx-font-size: 20px;
+    }
+    .sidebar {
+        -fx-pref-width: 220px;
+    }
+    .nav-button {
+        -fx-pref-width: 190px;
+    }
+}
+
+/* Ensure proper scrolling */
+.scroll-pane {
+    -fx-fit-to-width: true;
+    -fx-fit-to-height: false;
+}
+
+/* Responsive dialog content */
+.dialog-content {
+    -fx-min-width: 400px;
+    -fx-pref-width: 600px;
+    -fx-max-width: 800px;
+}
+
+/* Prevent text overflow */
+.label, .button, .text-field {
+    -fx-wrap-text: true;
+}
+
+/* Responsive spacing */
+.vbox-spacing {
+    -fx-spacing: 15px;
+}
+
+.hbox-spacing {
+    -fx-spacing: 10px;
+}

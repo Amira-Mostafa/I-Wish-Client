@@ -9,8 +9,9 @@ import javafx.geometry.Pos;
 
 public class UIUtils {
     
-    public static final String DEFAULT_WISH_IMAGE = "https://images.unsplash.com/photo-1579586337278-3f3d5b3b3b3b?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80";
-    public static final String DEFAULT_USER_AVATAR = "https://images.unsplash.com/photo-1494790108755-2616b612b786?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80";
+    public static final String DEFAULT_WISH_IMAGE = "/com/example/utils/wish.jpg";
+    public static final String DEFAULT_USER_AVATAR = "/com/example/utils/avatar.png";
+
     
     public static Button createGradientButton(String text, double width, double height) {
         Button button = new Button(text);
@@ -124,7 +125,7 @@ public class UIUtils {
     
     public static Button createActionButton(String text, String tooltipText) {
         Button button = new Button(text);
-        button.setPrefSize(200, 80);
+        button.setPrefSize(400, 80);
         button.setStyle("-fx-background-color: white; " +
                        "-fx-border-color: #764ba2; " +
                        "-fx-border-width: 2; " +

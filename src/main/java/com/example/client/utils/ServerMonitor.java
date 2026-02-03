@@ -2,7 +2,7 @@ package com.example.client.utils;
 
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent; // <-- THIS ONE is required!
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
@@ -38,7 +38,12 @@ public class ServerMonitor {
                     try {
                         String fxmlToLoad = isUp ? loginFXML : notAvailableFXML;
                         Parent root = javafx.fxml.FXMLLoader.load(getClass().getResource(fxmlToLoad));
-                        stage.setScene(new javafx.scene.Scene(root, 1550, 800));
+                        javafx.scene.Scene scene = new javafx.scene.Scene(root, 1550, 800);
+                        scene.getStylesheets().add(getClass().getResource("/styles.css").toExternalForm());
+                        stage.setScene(scene);
+                        stage.setMinWidth(1200);
+                        stage.setMinHeight(700);
+                        stage.setResizable(true);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }

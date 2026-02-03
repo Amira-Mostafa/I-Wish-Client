@@ -1,15 +1,11 @@
 package com.example.client.controllers;
 
 import com.example.client.services.DataManagerClient;
-import com.example.models.Contribution;
-import com.example.models.Wish;
+import com.example.models.*;
 import com.example.utils.DialogUtils;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 public class ContributionController {
@@ -20,19 +16,15 @@ public class ContributionController {
     @FXML private Button contributeButton;
     @FXML private Button cancelButton;
     
-    private int wishId; // Store the wish ID to contribute to
-    private Wish wish; // Store wish details for validation
+    private int wishId;
+    private Wish wish; 
     
-    // Method to set the wish ID (call this before showing the dialog)
     public void setWishId(int wishId) {
         this.wishId = wishId;
-        // Load wish details to get remaining amount
         loadWishDetails();
     }
     
     private void loadWishDetails() {
-        // Get wish details from friends' wishes or search
-        // For now, we'll validate on the server side
         remainingAmountLabel.setText("Enter the amount you'd like to contribute");
     }
     
