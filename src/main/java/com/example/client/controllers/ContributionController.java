@@ -38,15 +38,13 @@ public class ContributionController {
         contributeButton.setOnAction(e -> handleContribute());
         cancelButton.setOnAction(e -> handleCancel());
         
-        // Update remaining amount label as user types
         amountField.textProperty().addListener((obs, oldVal, newVal) -> {
             updateRemainingAmount();
         });
     }
     
     private void updateRemainingAmount() {
-        // This will be updated when we have wish details
-        // For now, just show placeholder
+
     }
     
     private void handleContribute() {
@@ -70,7 +68,6 @@ public class ContributionController {
                 return;
             }
             
-            // Make the contribution (no message field - removed from schema)
             System.out.println("Attempting to contribute to wish ID: " + wishId);
             Contribution contribution = DataManagerClient.makeContribution(wishId, amount, "");
             
@@ -78,7 +75,6 @@ public class ContributionController {
                 DialogUtils.showSuccess("Contribution Successful!", 
                     String.format("You've contributed $%.2f to this wish.\n\nThank you for your generosity!", amount));
                 
-                // Close the dialog
                 Stage stage = (Stage) contributeButton.getScene().getWindow();
                 stage.close();
             } else {
