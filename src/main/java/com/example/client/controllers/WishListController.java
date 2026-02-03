@@ -54,7 +54,6 @@ public class WishListController {
     private void loadWishListContent() {
         contentArea.getChildren().clear();
 
-        // Header
         HBox titleRow = new HBox();
         titleRow.setAlignment(Pos.CENTER_LEFT);
         titleRow.setSpacing(20);
@@ -74,7 +73,6 @@ public class WishListController {
         subtitle.setFont(Font.font("Arial", 16));
         subtitle.setTextFill(Color.GRAY);
 
-        // Wish items
         List<Wish> wishItems = DataManagerClient.getCurrentUserWishes();
 
         VBox wishItemsContainer = new VBox(15);
@@ -114,7 +112,6 @@ public class WishListController {
                 "-fx-border-width: 1; " +
                 "-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.05), 5, 0, 0, 2);");
 
-        // Image on left
         VBox imageBox = new VBox();
         imageBox.setAlignment(Pos.TOP_CENTER);
         imageBox.setPrefWidth(120);
@@ -128,35 +125,28 @@ public class WishListController {
             String imageUrl;
 
             if (item.getImagePath() != null && !item.getImagePath().isEmpty()) {
-                // User has custom wish image
                 imageUrl = item.getImagePath();
 
-                // Convert Windows path to file:// URL if needed
                 if (imageUrl.contains(":\\")) {
                     imageUrl = "file:/" + imageUrl.replace("\\", "/");
                 }
             } else {
-                // Use default wish image
                 imageUrl = UIUtils.DEFAULT_WISH_IMAGE;
             }
 
-            // Try to load the image
             wishImage.setImage(new Image(imageUrl, 100, 100, true, true));
 
         } catch (Exception e) {
-            // If loading fails, try to load default using URL method
             try {
                 String defaultUrl = getClass().getResource(UIUtils.DEFAULT_WISH_IMAGE).toString();
                 wishImage.setImage(new Image(defaultUrl, 100, 100, true, true));
             } catch (Exception ex) {
-                // If that also fails, leave image blank
                 System.err.println("Could not load wish image: " + ex.getMessage());
             }
         }
 
         imageBox.getChildren().add(wishImage);
 
-        // Main content in middle
         VBox itemInfo = new VBox(10);
         HBox.setHgrow(itemInfo, Priority.ALWAYS);
 
@@ -228,12 +218,10 @@ public class WishListController {
 
         itemInfo.getChildren().addAll(header, description, priceRow, progressBar, progressInfo);
 
-        // Buttons on right
         VBox buttonBox = new VBox(10);
         buttonBox.setAlignment(Pos.CENTER);
         buttonBox.setPrefWidth(150);
 
-        // Only show edit and delete buttons for incomplete wishes
         if (!item.isCompleted()) {
             Button editButton = new Button("Edit");
             editButton.setStyle("-fx-background-color: #764ba2; " +
@@ -265,7 +253,6 @@ public class WishListController {
 
             buttonBox.getChildren().addAll(editButton, deleteButton);
         } else {
-            // For completed wishes, show a "Completed" label instead
             Label completedLabel = new Label("✓ Completed");
             completedLabel.setStyle("-fx-text-fill: #4CAF50; " +
                     "-fx-font-weight: bold; " +
@@ -293,7 +280,6 @@ public class WishListController {
             stage.setTitle("Add New Wish");
             stage.setScene(new Scene(root, 800, 600));
             stage.showAndWait();
-            // Refresh after dialog closes
             loadWishListContent();
         } catch (IOException ex) {
             ex.printStackTrace();
@@ -315,7 +301,6 @@ public class WishListController {
             Parent root = loader.load();
 
             EditWishController controller = loader.getController();
-            // Set data after load() - initialize() will have been called automatically
             controller.setWishData(
                     wish.getWishId(),
                     wish.getName() != null ? wish.getName() : "",
@@ -327,7 +312,6 @@ public class WishListController {
             stage.setTitle("Edit Wish");
             stage.setScene(new Scene(root, 800, 600));
             stage.showAndWait();
-            // Refresh after dialog closes
             loadWishListContent();
         } catch (IOException ex) {
             ex.printStackTrace();
@@ -355,7 +339,6 @@ public class WishListController {
 
     @FXML
     private void handleWishList() {
-        // Already on wish list page
         loadWishListContent();
     }
 
