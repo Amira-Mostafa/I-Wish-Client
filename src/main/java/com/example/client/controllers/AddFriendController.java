@@ -23,31 +23,26 @@ public class AddFriendController {
     @FXML private Button searchButton;
     @FXML private Button cancelButton;
     
-    // Default avatar image loaded once
     private Image defaultAvatar;
         
     @FXML
     public void initialize() {
-        // Pre-load default avatar
         loadDefaultAvatar();
         
         searchButton.setOnAction(e -> handleSearch());
         cancelButton.setOnAction(e -> handleCancel());
         
-        // Allow Enter key to trigger search
         searchField.setOnAction(e -> handleSearch()); 
         loadAllUsers();
     }
     
     private void loadDefaultAvatar() {
         try {
-            // Load the default avatar from resources
             defaultAvatar = new Image(getClass().getResourceAsStream(UIUtils.DEFAULT_USER_AVATAR));
             System.out.println("Default avatar loaded successfully from: " + UIUtils.DEFAULT_USER_AVATAR);
         } catch (Exception e) {
             System.err.println("ERROR: Could not load default avatar from " + UIUtils.DEFAULT_USER_AVATAR);
             e.printStackTrace();
-            // Create a programmatic fallback avatar
             defaultAvatar = createPlaceholderAvatar("Default");
         }
     }
@@ -76,7 +71,6 @@ public class AddFriendController {
         
         System.out.println("Searching for: " + query);
         
-        // If query is empty, show all users
         List<User> searchResults;
         if (query.isEmpty()) {
             searchResults = DataManagerClient.getAllUsers();
@@ -116,12 +110,9 @@ public class AddFriendController {
             String imagePath = user.getImagePath();
             
             if (imagePath != null && !imagePath.trim().isEmpty()) {
-                // Clean the path
                 imagePath = imagePath.trim();
                 
-                // Try to load as a resource first (if it's a resource path)
                 if (imagePath.startsWith("/")) {
-                    // It looks like a resource path
                     try {
                         Image resourceImage = new Image(getClass().getResourceAsStream(imagePath));
                         avatar.setImage(resourceImage);
@@ -130,7 +121,6 @@ public class AddFriendController {
                         }
                         System.out.println("Loaded user image from resource: " + imagePath);
                     } catch (Exception e) {
-                        // Try as a file path instead
                         try {
                             Image fileImage = new Image("file:" + imagePath);
                             avatar.setImage(fileImage);
@@ -140,17 +130,14 @@ public class AddFriendController {
                         }
                     }
                 } else if (imagePath.startsWith("file:")) {
-                    // Already has file: prefix
                     Image fileImage = new Image(imagePath);
                     avatar.setImage(fileImage);
                     System.out.println("Loaded user image from file URL: " + imagePath);
                 } else if (imagePath.startsWith("http")) {
-                    // It's a web URL
                     Image webImage = new Image(imagePath);
                     avatar.setImage(webImage);
                     System.out.println("Loaded user image from web URL: " + imagePath);
                 } else {
-                    // Assume it's a local file path without prefix
                     try {
                         Image fileImage = new Image("file:" + imagePath);
                         avatar.setImage(fileImage);
@@ -160,25 +147,20 @@ public class AddFriendController {
                     }
                 }
                 
-                // Verify the image loaded
                 if (avatar.getImage() == null || avatar.getImage().isError()) {
                     throw new Exception("Image failed to load");
                 }
             } else {
-                // No image path provided, use default
                 throw new Exception("No image path provided for user: " + user.getName());
             }
         } catch (Exception e) {
             System.err.println("ERROR loading image for user " + user.getName() + ": " + e.getMessage());
-            // Use the pre-loaded default avatar
             avatar.setImage(defaultAvatar);
         }
         
-        // Make avatar circular
         Circle clip = new Circle(25, 25, 25);
         avatar.setClip(clip);
         
-        // User info
         VBox info = new VBox(5);
         Label nameLabel = new Label(user.getName());
         nameLabel.setFont(Font.font("Arial", FontWeight.BOLD, 16));
@@ -186,7 +168,6 @@ public class AddFriendController {
         emailLabel.setStyle("-fx-text-fill: #666; -fx-font-size: 12;");
         info.getChildren().addAll(nameLabel, emailLabel);
         
-        // Add Friend button
         Button addFriendBtn = UIUtils.createGradientButton("Add Friend", 120, 40);
         addFriendBtn.setOnAction(e -> {
             System.out.println("Add Friend button clicked for user: " + user.getName() + " (ID: " + user.getUserId() + ")");
@@ -195,7 +176,6 @@ public class AddFriendController {
                 DialogUtils.showSuccess("Friend Request Sent", 
                     "Your friend request has been sent to " + user.getName() + "!\n\n" +
                     "They will be notified and can accept your request.");
-                // Remove this user from the results
                 resultsContainer.getChildren().remove(item);
             } else {
                 DialogUtils.showError("Request Failed", 
@@ -213,17 +193,14 @@ public class AddFriendController {
     }
     
     private Image createPlaceholderAvatar(String name) {
-        // Create a simple colored circle as placeholder
         int size = 50;
         WritableImage img = new WritableImage(size, size);
         PixelWriter pw = img.getPixelWriter();
         
-        // Generate a color based on the name hash
         int color = name.hashCode() & 0xFFFFFF;
         
         for (int y = 0; y < size; y++) {
             for (int x = 0; x < size; x++) {
-                // Create a circle shape
                 double dx = x - size/2.0;
                 double dy = y - size/2.0;
                 double distance = Math.sqrt(dx*dx + dy*dy);
@@ -233,7 +210,7 @@ public class AddFriendController {
                         (color >> 16) & 0xFF,
                         (color >> 8) & 0xFF,
                         color & 0xFF,
-                        0.8  // Add some transparency
+                        0.8  
                     ));
                 } else {
                     pw.setColor(x, y, javafx.scene.paint.Color.TRANSPARENT);
