@@ -88,7 +88,6 @@ public class UIUtils {
     
     public static void addBadgeToButton(Button button, int count) {
         if (count > 0) {
-            // Create a StackPane to overlay the badge on the button
             javafx.scene.layout.StackPane stackPane = new javafx.scene.layout.StackPane();
             stackPane.getChildren().add(button);
             
@@ -102,12 +101,10 @@ public class UIUtils {
                           "-fx-min-width: 18; " +
                           "-fx-alignment: center;");
             
-            // Position badge at top-right
             javafx.scene.layout.StackPane.setAlignment(badge, javafx.geometry.Pos.TOP_RIGHT);
             stackPane.getChildren().add(badge);
             
-            // Note: This requires the button to be in a container that can be replaced
-            // For now, we'll update button text to include count
+
             String originalText = button.getText();
             if (!originalText.contains("(")) {
                 button.setText(originalText + " (" + count + ")");
