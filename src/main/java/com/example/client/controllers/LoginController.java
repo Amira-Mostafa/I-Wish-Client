@@ -22,7 +22,6 @@ public class LoginController {
 
     @FXML
     public void initialize() {
-        // Style the hyperlink
         UIUtils.styleHyperlink(createAccountLink);
 
         signInButton.setOnAction(e -> handleLogin());
@@ -38,7 +37,6 @@ public class LoginController {
         System.out.println("Email: " + email);
         System.out.println("Password length: " + password.length());
 
-        // Clear previous errors
         errorLabel.setVisible(false);
 
         if (email.isEmpty() || password.isEmpty()) {
