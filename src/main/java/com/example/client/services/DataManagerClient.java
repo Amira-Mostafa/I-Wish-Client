@@ -11,13 +11,11 @@ import com.example.models.Wish;
 
 public class DataManagerClient {
 
-    /* ================= AUTH ================= */
 
     public static boolean login(String email, String password) {
         String response = ClientSocket.send("LOGIN|" + email + "|" + password);
 
         if (response != null && response.startsWith("SUCCESS")) {
-            // SUCCESS|userId|name|email|imagePath
             String[] p = response.split("\\|");
             String imagePath = p.length > 4 ? p[4] : "";
             User user = new User(
@@ -52,7 +50,6 @@ public class DataManagerClient {
     }
     
 
-    /* ================= WISH ================= */
 
     public static boolean addWish(String title, String description,
                                   double price, String image) {
@@ -70,7 +67,7 @@ public class DataManagerClient {
 
         List<Wish> wishes = new ArrayList<>();
         if (response != null && response.startsWith("SUCCESS")) {
-            String data = response.substring(8); // Remove "SUCCESS|"
+            String data = response.substring(8); 
             if (!data.isEmpty()) {
                 String[] wishStrings = data.split(";");
                 for (String wishStr : wishStrings) {
@@ -94,7 +91,6 @@ public class DataManagerClient {
         return wishes;
     }
 
-    /* ================= FRIEND ================= */
 
     public static List<User> getFriends() {
         String response = ClientSocket.send(
@@ -102,7 +98,7 @@ public class DataManagerClient {
 
         List<User> friends = new ArrayList<>();
         if (response != null && response.startsWith("SUCCESS")) {
-            String data = response.substring(8); // Remove "SUCCESS|"
+            String data = response.substring(8); 
             if (!data.isEmpty()) {
                 String[] userStrings = data.split(";");
                 for (String userStr : userStrings) {
@@ -110,7 +106,6 @@ public class DataManagerClient {
                         continue;
                     }
                     String[] parts = userStr.split(",", -1);
-                    // Need at least 3 parts: user_id, name, email (image_path is optional)
                     if (parts.length >= 3) {
                         friends.add(new User(
                             Integer.parseInt(parts[0]),
@@ -287,7 +282,6 @@ public class DataManagerClient {
         return response != null && response.startsWith("SUCCESS");
     }
 
-    /* ================= CONTRIBUTION ================= */
 
     public static Contribution makeContribution(
         int wishId, double amount, String message) {
@@ -340,7 +334,6 @@ public class DataManagerClient {
     }
 
 
-    /* ================= NOTIFICATION ================= */
 
     public static List<Notification> getUserNotifications() {
         String response = ClientSocket.send(
