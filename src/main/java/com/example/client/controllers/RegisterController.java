@@ -35,16 +35,13 @@ public class RegisterController {
         createAccountButton.setOnAction(e -> handleRegister());
         signInLink.setOnAction(e -> showLoginScreen());
         
-        // Set default avatar
         try {
             profileImageView.setImage(new Image(UIUtils.DEFAULT_USER_AVATAR, 80, 80, true, true));
             Circle clip = new Circle(40, 40, 40);
             profileImageView.setClip(clip);
         } catch (Exception e) {
-            // Ignore
         }
         
-        // Handle image selection
         selectImageButton.setOnAction(e -> selectImage());
     }
     
@@ -81,7 +78,6 @@ public class RegisterController {
         System.out.println("Email: " + email);
         System.out.println("Password length: " + password.length());
         
-        // Clear previous errors
         errorLabel.setVisible(false);
         
         if (name.isEmpty() || email.isEmpty() || password.isEmpty() || confirmPassword.isEmpty()) {
@@ -99,7 +95,6 @@ public class RegisterController {
             return;
         }
         
-        // Validate email format - more comprehensive
         String emailRegex = "^[A-Za-z0-9+_.-]+@([A-Za-z0-9.-]+\\.[A-Za-z]{2,})$";
         if (!email.matches(emailRegex)) {
             showError("Please enter a valid email address");
@@ -141,7 +136,6 @@ public class RegisterController {
                 DialogUtils.showError("Error", "Error loading dashboard: " + ex.getMessage());
             }
         } else {
-            // Registration failed - likely duplicate email
             DialogUtils.showError("Registration Failed", 
                 "Unable to create account.\n\n" +
                 "This email address may already be registered.\n" +
