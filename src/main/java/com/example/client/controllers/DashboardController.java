@@ -57,7 +57,6 @@ public class DashboardController {
     public void initialize() {
         System.out.println("=== DashboardController.initialize() ===");
 
-        // Try to get user from DataManagerClient if not passed
         if (currentUser == null) {
             System.out.println("WARNING: User not passed via setCurrentUser()");
             currentUser = UserSession.getUser();
@@ -67,7 +66,6 @@ public class DashboardController {
 
         if (currentUser == null) {
             System.out.println("ERROR: Still no user! Using dummy for testing...");
-            // Use dummy user for testing
             currentUser = new User(0, "Test User", "test@test.com", "default.jpg");
 
         }
@@ -78,13 +76,11 @@ public class DashboardController {
     }
 
     private void updateNavigationBadges() {
-        // Update notification count
         int unreadCount = DataManagerClient.getUnreadNotificationCount();
         if (notificationsBtn != null) {
             UIUtils.updateButtonWithCount(notificationsBtn, "🔔 Notifications", unreadCount);
         }
 
-        // Update friend request count
         int pendingRequests = DataManagerClient.getPendingFriendRequests().size();
         if (friendsBtn != null) {
             UIUtils.updateButtonWithCount(friendsBtn, "👥 Friends", pendingRequests);
@@ -100,7 +96,6 @@ public class DashboardController {
 
         welcomeLabel.setText("Welcome back, " + currentUser.getName() + "!");
 
-        // Load and display profile image
         loadProfileImage(currentUser);
 
         loadStats();
@@ -113,29 +108,23 @@ public class DashboardController {
             String imagePath = user.getImagePath();
             Image image;
 
-            // Check if user has a custom image
             if (imagePath != null && !imagePath.trim().isEmpty()) {
-                // User has an image path - try to load it
                 System.out.println("DEBUG: Trying to load user's image: " + imagePath);
 
-                // Try to load user's image
                 try {
                     image = new Image(imagePath);
                     System.out.println("DEBUG: Successfully loaded user's image");
                 } catch (Exception e) {
-                    // If user's image fails, fall back to default
                     System.out.println("DEBUG: User's image failed, using default");
                     String defaultUrl = getClass().getResource("/com/example/utils/avatar.png").toString();
                     image = new Image(defaultUrl);
                 }
             } else {
-                // No user image, use default
                 System.out.println("DEBUG: No user image, using default");
                 String defaultUrl = getClass().getResource("/com/example/utils/avatar.png").toString();
                 image = new Image(defaultUrl);
             }
 
-            // Set the image
             if (profileImageView != null) {
                 profileImageView.setImage(image);
                 profileImageView.setClip(new Circle(20, 20, 20));
@@ -149,7 +138,6 @@ public class DashboardController {
         } catch (Exception e) {
             System.err.println("Error loading profile image: " + e.getMessage());
 
-            // Ultimate fallback
             try {
                 String defaultUrl = getClass().getResource("/com/example/utils/avatar.png").toString();
                 Image defaultImage = new Image(defaultUrl);
@@ -357,7 +345,6 @@ public class DashboardController {
         alert.setContentText(message);
         alert.showAndWait();
 
-        // Redirect to login
         handleLogout();
     }
 
@@ -371,7 +358,6 @@ public class DashboardController {
 
     @FXML
     private void handleDashboard() {
-        // Already on dashboard
     }
 
     @FXML
