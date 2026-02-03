@@ -79,7 +79,6 @@ public class NotificationsController {
         
         titleRow.getChildren().add(spacer);
 
-        // Notification items
         VBox notificationsList = new VBox(15);
         
         List<Notification> notifications = DataManagerClient.getUserNotifications();
@@ -184,7 +183,6 @@ public class NotificationsController {
     
     @FXML
     private void handleNotifications() {
-        // Already on notifications page
         loadNotificationsContent();
     }
     
