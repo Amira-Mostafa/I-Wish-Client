@@ -63,22 +63,18 @@ public class EditWishController {
                     wishImageView
                             .setImage(new Image(com.example.utils.UIUtils.DEFAULT_WISH_IMAGE, 100, 100, true, true));
                 } catch (Exception ex) {
-                    // Ignore
                 }
             }
         } else if (wishImageView != null) {
-            // Set default image if no image URL
             try {
                 wishImageView.setImage(new Image(com.example.utils.UIUtils.DEFAULT_WISH_IMAGE, 100, 100, true, true));
             } catch (Exception e) {
-                // Ignore
             }
         }
     }
 
     @FXML
     public void initialize() {
-        // Ensure fields are initialized
         if (nameField == null || descriptionField == null || priceField == null || wishImageView == null) {
             System.err.println("Warning: Some FXML fields are not initialized!");
             return;
@@ -87,14 +83,11 @@ public class EditWishController {
         saveButton.setOnAction(e -> handleSave());
         cancelButton.setOnAction(e -> handleCancel());
 
-        // Set default wish image
         try {
             wishImageView.setImage(new Image(com.example.utils.UIUtils.DEFAULT_WISH_IMAGE, 100, 100, true, true));
         } catch (Exception e) {
-            // Ignore
         }
 
-        // Handle image selection
         if (selectImageButton != null) {
             selectImageButton.setOnAction(e -> selectImage());
         }
@@ -123,7 +116,6 @@ public class EditWishController {
     }
 
     private void handleSave() {
-        // Handle null values safely - check both field and getText() result
         if (nameField == null || descriptionField == null || priceField == null) {
             showError("Form fields are not initialized. Please close and try again.");
             return;
@@ -145,7 +137,6 @@ public class EditWishController {
                 return;
             }
 
-            // Use selected image path or empty string
             String imageUrl = (selectedImagePath != null && !selectedImagePath.isEmpty()) ? selectedImagePath : "";
             boolean success = DataManagerClient.updateWish(wishId, name, description, price, imageUrl);
             if (success) {
